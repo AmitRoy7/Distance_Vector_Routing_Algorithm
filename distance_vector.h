@@ -308,7 +308,7 @@ public:
         if (isUpdated)
         {
 
-            print(actualEntry, getSelfNameOf(selfIndex), "Change detected!\nRouting table before change", true);
+            print(actualEntry, getSelfNameOf(selfIndex), "Change Occurred!\nRouting table before change", true);
             print(adv, source, "Distance Vector that caused the change", false);
             print(routerList, getSelfNameOf(selfIndex),"Routing table after change", false);
 
