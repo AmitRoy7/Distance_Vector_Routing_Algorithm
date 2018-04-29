@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#Assumed first router name as ‘A’ and port no. 2000
+#Executed Other router name in alphabetical order
+#Assigned port no. sequentially
+#To assign different router name and port no. change in start-router1
+#Run From Terminal ./start-router or ./start-router1
+
 
 first1=config
 second1=.txt
@@ -11,7 +17,7 @@ outputfilename=routing-outputA.txt
 port=2000
 
 for ((i=0;i<26;i++)) ;
-do	
+do
 	if [ -f "$inputfilename" ] ;
 	then xterm -title "$char" -hold -e ./dv_routing "$char" "$port" "$inputfilename"  | tee "$outputfilename" & sleep 1
 	char=$(echo "$char" | tr "0-9A-Z" "1-9A-Z_")

@@ -17,11 +17,7 @@ struct packet_header
     int length;
 };
 
-void sendToSelf(DV &dv, int socketfd, int type, char source = 0, char dest = 0, int dataLength = 0, void *data = 0);
-void sendToAll(DV &dv, int socketfd);
-void *makePacket(int type, char source, char dest, int dataLength, void *data);
-packet_header findpacket_header(void *packet);
-void *finddata(void *packet, int length);
+
 
 
 /// CREATE PACKET WITH HEADERS AND DATA
@@ -67,7 +63,7 @@ packet_header findpacket_header(void *packet)
 }
 
 /// WAKE UP PERIODICALLY TO MULTICAST ADVERTISEMENT
-void sendToSelf(DV &dv, int socketfd, int type, char source, char dest, int dataLength, void *data)
+void sendToSelf(DV &dv, int socketfd, int type, char source = 0, char dest = 0, int dataLength = 0, void *data = 0)
 {
     void *sendPacket = makePacket(type, source, dest, dataLength, data);
     sockaddr_in destAddr = dv.myaddr();

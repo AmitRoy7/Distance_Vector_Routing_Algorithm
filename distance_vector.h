@@ -104,9 +104,6 @@ public:
         }
 
 
-        /// special port number for sending data packet
-        portOf['H'] = 11111;
-
 
         /// Keep BackUp of Neighbour Information
         memcpy((void*)routerListBackup, (void*)routerList, sizeof(routerList));
@@ -177,7 +174,7 @@ public:
     }
 
 
-    ///RETURNS DISTANCE VECTOR OF DESTIONATION
+    ///RETURNS DISTANCE VECTOR OF DESTINATION
     dv_entry getDestinationDistanceVector(const char dest) const
     {
         return routerList[getIndexOf(dest)];
@@ -255,7 +252,7 @@ public:
 
 
     /// update current router's distance vector based on received advertisements
-    /// return false if current router's distance vector was not changed
+    /// print distance vector if current router's distance vector was changed
 
 
     void update(const void *recvBuffer, char source)
@@ -364,7 +361,7 @@ public:
 
 
     /// PRINT DISTANCE VECTOR
-    ///format: source, destination, port number of nexthop router, cost to destination
+    ///format: source, destination, cost to destination
     void print(dv_entry dv[], char name, string msg, bool timestamp) const
     {
 
@@ -387,7 +384,7 @@ public:
             printf("shortest path to node %c: ",getSelfNameOf(dest));
             if (dv[dest].cost() == -1)
             {
-                printf("Not Reachable INF");
+                printf("Not Reachable INF\n");
                 continue;
             }
 

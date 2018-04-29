@@ -1,10 +1,10 @@
 /*
 *
 *
-*           AUTHOR:  AMIT ROY
-*           DEPARTMENT OF CSE
-*          UNIVERSITY OF DHAKA
-*    Topic: DVR Algorithm Implementation
+*              AUTHOR:  AMIT ROY
+*              DEPARTMENT OF CSE
+*             UNIVERSITY OF DHAKA
+*    Topic: Distance Vector Routing Protocol
 *
 *
 */
@@ -18,11 +18,17 @@
 #include "node.h"
 
 
+void quit(int arg) {
 
+		printf("\n Router is Killed\n\n");
+}
 
 
 int main(int argc, char **argv)
 {
+
+    ///FOR TERMINATION USING CTRL-C
+    signal(SIGTERM, quit);
 
 
     /// COMMAND LINE ERROR DETECTION
@@ -78,7 +84,7 @@ int main(int argc, char **argv)
         while(true)
         {
                                                     /// periodically wake up parent process
-            sendToSelf(dv, socketfd, TYPE_WAKEUP);
+            sendToSelf(dv, socketfd, TYPE_WAKE_UP);
             sleep(5);
         }
     }
@@ -105,8 +111,8 @@ int main(int argc, char **argv)
 
 
 
-            if(h.type==TYPE_BROADCAST)
-            {
+            if(h.type==TYPE_BROADCAST)                      ///UPDATE NEIGHBOUR ROUTERS' ROUTING TABLE
+            {                                               ///SEND PACKET TO NEIGHBOUR ROUTER PERIODICALLY
 
 
                 dv_entry entries[MAX_ROUTERS];
@@ -124,7 +130,7 @@ int main(int argc, char **argv)
 
             }
 
-            else if(h.type==TYPE_WAKEUP)        /// perform periodic tasks
+            else if(h.type==TYPE_WAKE_UP)                   /// WAKE UP PERIODICALLY
             {
 
                 for (int i = 0; i < neighbors.size(); i++)
