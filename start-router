@@ -1,13 +1,22 @@
 #!/bin/bash
 
 
+first1=config
+second1=.txt
+first2=routing-output
+second2=.txt
+char=A
+inputfilename=configA.txt
+outputfilename=routing-outputA.txt
+port=2000
 
-echo 'xterm -title "A" -hold -e "./dv_routing A 2000 configA.txt  | tee routing-outputA.txt" & sleep 1
-xterm -title "B" -hold -e "./dv_routing B 2001 configB.txt | tee routing-outputB.txt" & sleep 1
-xterm -title "C" -hold -e "./dv_routing C 2002 configC.txt| tee routing-outputC.txt" & sleep 1
-xterm -title "D" -hold -e "./dv_routing D 2003 configD.txt| tee routing-outputD.txt" & sleep 1
-xterm -title "E" -hold -e "./dv_routing E 2004 configE.txt| tee routing-outputE.txt" & sleep 1
-xterm -title "F" -hold -e "./dv_routing F 2005 configF.txt| tee routing-outputF.txt" & sleep 1' | shuf > exec
-chmod 777 exec
-./exec
-rm exec
+for ((i=0;i<26;i++)) ;
+do	
+	if [ -f "$inputfilename" ] ;
+	then xterm -title "$char" -hold -e ./dv_routing "$char" "$port" "$inputfilename"  | tee "$outputfilename" & sleep 1
+	char=$(echo "$char" | tr "0-9A-Z" "1-9A-Z_")
+	inputfilename=${first1}${char}${second1}
+	outputfilename=${first2}${char}${second2}
+	port=$((port+1))
+	fi;
+done;
