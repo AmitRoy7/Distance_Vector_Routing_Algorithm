@@ -1,0 +1,8 @@
+#!/bin/bash
+
+xterm -title A -hold -e ./dv_routing A 2000 configA.txt  | tee routing-outputA.txt & sleep 1
+xterm -title B -hold -e ./dv_routing B 2001 configB.txt  | tee routing-outputB.txt & sleep 1
+xterm -title C -hold -e ./dv_routing C 2002 configC.txt  | tee routing-outputC.txt & sleep 1
+xterm -title D -hold -e ./dv_routing D 2003 configD.txt  | tee routing-outputD.txt & sleep 1
+xterm -title E -hold -e ./dv_routing E 2004 configE.txt  | tee routing-outputE.txt & sleep 1
+xterm -title F -hold -e ./dv_routing F 2005 configF.txt  | tee routing-outputF.txt & sleep 1
