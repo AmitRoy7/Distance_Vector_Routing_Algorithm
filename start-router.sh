@@ -7,22 +7,21 @@
 #Run From Terminal ./start-router or ./start-router1
 
 
+
 first1=config
 second1=.txt
 first2=routing-output
 second2=.txt
 char=A
 inputfilename=configA.txt
-outputfilename=routing-outputA.txt
 port=2000
 
 for ((i=0;i<26;i++)) ;
-do
+do	
 	if [ -f "$inputfilename" ] ;
-	then xterm -title "$char" -hold -e ./dv_routing "$char" "$port" "$inputfilename"  | tee "$outputfilename" & sleep 1
+	then xterm -title "$char" -hold -e ./dv_routing "$char" "$port" "$inputfilename" & sleep 1
 	char=$(echo "$char" | tr "0-9A-Z" "1-9A-Z_")
 	inputfilename=${first1}${char}${second1}
-	outputfilename=${first2}${char}${second2}
 	port=$((port+1))
 	fi;
 done;
